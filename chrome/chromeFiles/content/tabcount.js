@@ -15,7 +15,7 @@ var tabcount = {
 		myFile.append("tabcounts.csv");
 
 		Components.utils.import("resource://gre/modules/FileUtils.jsm");
-		tabcount.out = FileUtils.openFileOutputStream(myFile);
+		tabcount.out = FileUtils.openFileOutputStream(myFile, 0x02 | 0x10 | 0x08);
 
 		tabcount.updateStatusTimeout();
 	},
@@ -88,7 +88,7 @@ var tabcount = {
 	},
 
 	writeTabCount : function(count) {
-		const line = Math.round((new Date()).getTime() / 1000) + "," + count + "\n";
+		const line = (new Date()).getTime() + "," + count + "\n";
 		tabcount.out.write(line, line.length);
 	},
 
